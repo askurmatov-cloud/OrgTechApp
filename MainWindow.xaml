@@ -1,0 +1,127 @@
+<Window x:Class="OrgTechApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Материальный учет оргтехники"
+        Height="760" Width="1200"
+        WindowStartupLocation="CenterScreen"
+        Background="{StaticResource BackgroundBrush}">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="72"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Border Grid.Row="0" Background="{StaticResource PrimaryDarkBrush}" Padding="24,0">
+            <Grid>
+                <StackPanel VerticalAlignment="Center">
+                    <TextBlock Text="МАТЕРИАЛЬНЫЙ УЧЁТ ОРГТЕХНИКИ"
+                               Foreground="White" FontSize="19" FontWeight="Bold"/>
+                    <TextBlock Text="Информационно-справочная система"
+                               Foreground="#BFD4EA" FontSize="11"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
+                    <StackPanel Margin="0,0,18,0" VerticalAlignment="Center">
+                        <TextBlock x:Name="lblUser" Text="Пользователь"
+                                   Foreground="White" FontSize="13"
+                                   HorizontalAlignment="Right"/>
+                        <TextBlock x:Name="lblRole" Text="Роль"
+                                   Foreground="#BFD4EA" FontSize="11"
+                                   HorizontalAlignment="Right"/>
+                    </StackPanel>
+                    <Button Content="Выйти" Width="88" Height="32"
+                            Style="{StaticResource DangerButton}"
+                            Click="btnLogout_Click"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <Grid Grid.Row="1" Margin="20">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="240"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Border Grid.Column="0" Style="{StaticResource CardBorder}" Margin="0,0,16,0" Padding="12">
+                <StackPanel>
+                    <TextBlock Text="РАЗДЕЛЫ" Style="{StaticResource MutedText}"
+                               FontWeight="Bold" Margin="8,4,8,12"/>
+                    <Button Content="Оборудование" Height="44" Margin="0,0,0,8"
+                            Style="{StaticResource PrimaryButton}" Click="btnEquipment_Click"/>
+                    <Button x:Name="btnOperations" Content="Движение техники" Height="44" Margin="0,0,0,8"
+                            Style="{StaticResource SecondaryButton}" Click="btnOperations_Click"/>
+                    <Button x:Name="btnRequests" Content="Заявки" Height="44" Margin="0,0,0,8"
+                            Style="{StaticResource SecondaryButton}" Click="btnRequests_Click"/>
+                    <Button x:Name="btnReports" Content="Отчёты" Height="44" Margin="0,0,0,8"
+                            Style="{StaticResource SecondaryButton}" Click="btnReports_Click"/>
+                    <Button x:Name="btnUsers" Content="Пользователи" Height="44" Margin="0,0,0,8"
+                            Style="{StaticResource SecondaryButton}" Click="btnUsers_Click"/>
+                    <Border Height="1" Background="{StaticResource BorderBrush}" Margin="4,14,4,14"/>
+                </StackPanel>
+            </Border>
+
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <StackPanel Grid.Row="0" Margin="0,0,0,14">
+                    <TextBlock Text="Обзор" Style="{StaticResource TitleText}"/>
+                    <TextBlock x:Name="lblWelcome" Style="{StaticResource MutedText}" Margin="0,4,0,0"/>
+                </StackPanel>
+
+                <WrapPanel Grid.Row="1" Margin="0,0,0,16">
+                    <Border Style="{StaticResource CardBorder}" Width="195" Height="104" Margin="0,0,12,12">
+                        <StackPanel>
+                            <TextBlock Text="Всего техники" Style="{StaticResource MutedText}"/>
+                            <TextBlock x:Name="lblTotal" Text="0" FontSize="30" FontWeight="Bold"
+                                       Foreground="{StaticResource PrimaryBrush}" Margin="0,4,0,0"/>
+                        </StackPanel>
+                    </Border>
+                    <Border Style="{StaticResource CardBorder}" Width="195" Height="104" Margin="0,0,12,12">
+                        <StackPanel>
+                            <TextBlock Text="В эксплуатации" Style="{StaticResource MutedText}"/>
+                            <TextBlock x:Name="lblInUse" Text="0" FontSize="30" FontWeight="Bold"
+                                       Foreground="{StaticResource AccentBrush}" Margin="0,4,0,0"/>
+                        </StackPanel>
+                    </Border>
+                    <Border Style="{StaticResource CardBorder}" Width="195" Height="104" Margin="0,0,12,12">
+                        <StackPanel>
+                            <TextBlock Text="В ремонте" Style="{StaticResource MutedText}"/>
+                            <TextBlock x:Name="lblRepair" Text="0" FontSize="30" FontWeight="Bold"
+                                       Foreground="#E39A18" Margin="0,4,0,0"/>
+                        </StackPanel>
+                    </Border>
+                    <Border Style="{StaticResource CardBorder}" Width="195" Height="104" Margin="0,0,12,12">
+                        <StackPanel>
+                            <TextBlock Text="Списано" Style="{StaticResource MutedText}"/>
+                            <TextBlock x:Name="lblWrittenOff" Text="0" FontSize="30" FontWeight="Bold"
+                                       Foreground="{StaticResource DangerBrush}" Margin="0,4,0,0"/>
+                        </StackPanel>
+                    </Border>
+                </WrapPanel>
+
+                <Border Grid.Row="2" Style="{StaticResource CardBorder}" Padding="14">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Grid.Row="0" Text="Последние операции"
+                                   Style="{StaticResource SectionTitle}" Margin="0,0,0,10"/>
+                        <DataGrid Grid.Row="1" x:Name="dgRecent" AutoGenerateColumns="False" RowHeight="32">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Дата" Binding="{Binding DataOperatsii, StringFormat=dd.MM.yyyy}" Width="90"/>
+                                <DataGridTextColumn Header="Операция" Binding="{Binding Operatsiya}" Width="110"/>
+                                <DataGridTextColumn Header="Инвентарный №" Binding="{Binding InventarnyyNomer}" Width="120"/>
+                                <DataGridTextColumn Header="Техника" Binding="{Binding Naimenovanie}" Width="*"/>
+                                <DataGridTextColumn Header="Исполнитель" Binding="{Binding Ispolnitel}" Width="120"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Grid>
+                </Border>
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>

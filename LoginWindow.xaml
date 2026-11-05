@@ -1,0 +1,54 @@
+<Window x:Class="OrgTechApp.LoginWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Вход — Материальный учет оргтехники"
+        Height="500" Width="440"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize"
+        Background="{StaticResource BackgroundBrush}">
+    <Grid Margin="28">
+        <Border Style="{StaticResource CardBorder}" Padding="28">
+            <StackPanel>
+                <TextBlock Text="УЧЁТ ОРГТЕХНИКИ"
+                           FontSize="25" FontWeight="Bold"
+                           Foreground="{StaticResource PrimaryDarkBrush}"
+                           HorizontalAlignment="Center"/>
+                <TextBlock Text="Информационно-справочная система"
+                           Style="{StaticResource MutedText}"
+                           HorizontalAlignment="Center"
+                           Margin="0,6,0,26"/>
+
+                <TextBlock Text="Логин" Style="{StaticResource FormLabel}"/>
+                <TextBox x:Name="txtLogin" Margin="0,0,0,14"/>
+
+                <TextBlock Text="Пароль" Style="{StaticResource FormLabel}"/>
+                <PasswordBox x:Name="txtPassword" Margin="0,0,0,18"/>
+
+                <Button x:Name="btnLogin" Content="Войти"
+                        Style="{StaticResource PrimaryButton}"
+                        Height="38" IsDefault="True"
+                        Click="btnLogin_Click" Width="80"/>
+                <Button x:Name="btnRegister" Content="Регистрация пользователя"
+                        Style="{StaticResource SecondaryButton}"
+                        Height="36" Click="btnRegister_Click" Width="199"/>
+
+                <TextBlock x:Name="txtStatus"
+                           Foreground="{StaticResource DangerBrush}"
+                           TextWrapping="Wrap"
+                           HorizontalAlignment="Center"
+                           Margin="0,14,0,0"/>
+
+                <Border Background="#F7FAFD" CornerRadius="6" Padding="10" Margin="0,18,0,0">
+                    <StackPanel>
+                        <TextBlock Text="Демонстрационные учётные записи"
+                                   FontSize="11" FontWeight="SemiBold"
+                                   Foreground="{StaticResource MutedBrush}"/>
+                        <TextBlock Text="admin / Admin#2026   •   a.petrova / User#2026"
+                                   FontSize="11" Foreground="{StaticResource MutedBrush}"
+                                   Margin="0,4,0,0"/>
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+        </Border>
+    </Grid>
+</Window>

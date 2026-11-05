@@ -1,0 +1,102 @@
+<Window x:Class="OrgTechApp.OperationWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Движение техники"
+        Height="760" Width="1050"
+        WindowStartupLocation="CenterOwner"
+        Background="{StaticResource BackgroundBrush}"
+        Loaded="Window_Loaded">
+    <Grid Margin="18">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Margin="0,0,0,12">
+            <TextBlock Text="Движение техники" Style="{StaticResource TitleText}"/>
+            <TextBlock Text="Поступление, передача, списание, ремонт и инвентаризация"
+                       Style="{StaticResource MutedText}" Margin="0,3,0,0"/>
+        </StackPanel>
+
+        <Border Grid.Row="1" Style="{StaticResource CardBorder}" Margin="0,0,0,12">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,0,8,8">
+                    <TextBlock Text="Оборудование *" Style="{StaticResource FormLabel}"/>
+                    <ComboBox x:Name="cmbEquipment" DisplayMemberPath="Display" SelectedValuePath="Id"/>
+                </StackPanel>
+
+                <StackPanel Grid.Row="0" Grid.Column="2" Margin="8,0,0,8">
+                    <TextBlock Text="Тип операции *" Style="{StaticResource FormLabel}"/>
+                    <ComboBox x:Name="cmbOperation" DisplayMemberPath="Naimenovanie"
+                              SelectedValuePath="KodOperatsii" SelectionChanged="cmbOperation_SelectionChanged"/>
+                </StackPanel>
+
+                <StackPanel Grid.Row="1" Grid.Column="0" Margin="0,0,8,8">
+                    <TextBlock Text="Получатель" Style="{StaticResource FormLabel}"/>
+                    <ComboBox x:Name="cmbRecipient" DisplayMemberPath="Name" SelectedValuePath="Id"/>
+                </StackPanel>
+
+                <StackPanel Grid.Row="1" Grid.Column="1" Margin="8,0,8,8">
+                    <TextBlock Text="Дата операции *" Style="{StaticResource FormLabel}"/>
+                    <DatePicker x:Name="dpOperation" Height="32"/>
+                </StackPanel>
+
+                <StackPanel Grid.Row="1" Grid.Column="2" Margin="8,0,0,8">
+                    <TextBlock Text="Документ" Style="{StaticResource FormLabel}"/>
+                    <TextBox x:Name="txtDocument"/>
+                </StackPanel>
+
+                <StackPanel Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,0,8,0">
+                    <TextBlock Text="Причина / основание" Style="{StaticResource FormLabel}"/>
+                    <TextBox x:Name="txtReason"/>
+                </StackPanel>
+
+                <StackPanel Grid.Row="2" Grid.Column="2" Margin="8,0,0,0">
+                    <TextBlock Text="Комментарий" Style="{StaticResource FormLabel}"/>
+                    <TextBox x:Name="txtComment"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <Grid Grid.Row="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,8">
+                <Button Content="Оформить операцию" Style="{StaticResource PrimaryButton}" Width="164" Click="btnSubmit_Click"/>
+                <Button Content="Обновить историю" Style="{StaticResource SecondaryButton}" Width="160" Click="btnRefreshHistory_Click"/>
+                <TextBlock x:Name="lblStatus" VerticalAlignment="Center" Margin="12,0,0,0"
+                           Foreground="{StaticResource MutedBrush}"/>
+            </StackPanel>
+
+            <TextBlock Grid.Row="1" Text="История по выбранной технике"
+                       Style="{StaticResource SectionTitle}" Margin="0,4,0,8"/>
+
+            <DataGrid Grid.Row="2" x:Name="dgHistory" AutoGenerateColumns="False" RowHeight="32">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Дата" Binding="{Binding DataOperatsii, StringFormat=dd.MM.yyyy}" Width="90"/>
+                    <DataGridTextColumn Header="Операция" Binding="{Binding Operatsiya}" Width="110"/>
+                    <DataGridTextColumn Header="Документ" Binding="{Binding NomerDokumenta}" Width="150"/>
+                    <DataGridTextColumn Header="Исполнитель" Binding="{Binding Ispolnitel}" Width="120"/>
+                    <DataGridTextColumn Header="Получатель" Binding="{Binding Poluchatel}" Width="170"/>
+                    <DataGridTextColumn Header="Причина" Binding="{Binding Prichina}" Width="*"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+    </Grid>
+</Window>

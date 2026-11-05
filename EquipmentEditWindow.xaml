@@ -1,0 +1,94 @@
+<Window x:Class="OrgTechApp.EquipmentEditWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Оборудование"
+        Height="720" Width="820"
+        WindowStartupLocation="CenterOwner"
+        Background="{StaticResource BackgroundBrush}">
+    <Grid Margin="18">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Margin="0,0,0,12">
+            <TextBlock x:Name="lblTitle" Text="Добавление оборудования" Style="{StaticResource TitleText}"/>
+            <TextBlock Text="Заполните карточку и при необходимости выберите фотографию"
+                       Style="{StaticResource MutedText}" Margin="0,3,0,0"/>
+        </StackPanel>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="300"/>
+            </Grid.ColumnDefinitions>
+
+            <Border Grid.Column="0" Style="{StaticResource CardBorder}" Margin="0,0,12,0">
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <StackPanel>
+                        <TextBlock Text="Инвентарный номер *" Style="{StaticResource FormLabel}"/>
+                        <TextBox x:Name="txtInventory" Margin="0,0,0,8"/>
+
+                        <TextBlock Text="Наименование *" Style="{StaticResource FormLabel}"/>
+                        <TextBox x:Name="txtName" Margin="0,0,0,8"/>
+
+                        <TextBlock Text="Модель *" Style="{StaticResource FormLabel}"/>
+                        <TextBox x:Name="txtModel" Margin="0,0,0,8"/>
+
+                        <TextBlock Text="Серийный номер *" Style="{StaticResource FormLabel}"/>
+                        <TextBox x:Name="txtSerial" Margin="0,0,0,8"/>
+
+                        <TextBlock Text="Поставщик *" Style="{StaticResource FormLabel}"/>
+                        <ComboBox x:Name="cmbSupplier" DisplayMemberPath="Name" SelectedValuePath="Id" Margin="0,0,0,8"/>
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Grid.Column="0" Margin="0,0,6,0">
+                                <TextBlock Text="Дата поступления *" Style="{StaticResource FormLabel}"/>
+                                <DatePicker x:Name="dpReceived" Height="32" Margin="0,0,0,8"/>
+                            </StackPanel>
+                            <StackPanel Grid.Column="1" Margin="6,0,0,0">
+                                <TextBlock Text="Гарантия, месяцев *" Style="{StaticResource FormLabel}"/>
+                                <TextBox x:Name="txtWarranty" Margin="0,0,0,8"/>
+                            </StackPanel>
+                        </Grid>
+
+                        <TextBlock Text="Стоимость *" Style="{StaticResource FormLabel}"/>
+                        <TextBox x:Name="txtCost" Margin="0,0,0,8"/>
+
+                        <TextBlock Text="Состояние *" Style="{StaticResource FormLabel}"/>
+                        <ComboBox x:Name="cmbStatus" DisplayMemberPath="Name" SelectedValuePath="Code" Margin="0,0,0,8"/>
+
+                        <TextBlock Text="Комментарий" Style="{StaticResource FormLabel}"/>
+                        <TextBox x:Name="txtComment" Height="70" TextWrapping="Wrap"
+                                 AcceptsReturn="True" VerticalContentAlignment="Top" Margin="0,0,0,4"/>
+                    </StackPanel>
+                </ScrollViewer>
+            </Border>
+
+            <Border Grid.Column="1" Style="{StaticResource CardBorder}">
+                <StackPanel>
+                    <TextBlock Text="Фотография" Style="{StaticResource SectionTitle}" Margin="0,0,0,10"/>
+                    <Border Height="210" CornerRadius="8" Background="#EEF3F8" ClipToBounds="True">
+                        <Image x:Name="imgPreview" Stretch="UniformToFill"/>
+                    </Border>
+                    <Button Content="Выбрать фото" Style="{StaticResource SecondaryButton}"
+                            Margin="0,12,0,0" Click="btnChoosePhoto_Click"/>
+                    <TextBlock x:Name="txtPhoto" Style="{StaticResource MutedText}"
+                               TextWrapping="Wrap" Margin="4,8,4,0"/>
+                    <TextBlock Text="Поддерживаются JPG, PNG, BMP. Файл копируется в папку Photos приложения."
+                               Style="{StaticResource MutedText}" TextWrapping="Wrap" Margin="4,12,4,0"/>
+                </StackPanel>
+            </Border>
+        </Grid>
+
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,12,0,0">
+            <Button Content="Сохранить" Style="{StaticResource PrimaryButton}" Width="120" Click="btnSave_Click"/>
+            <Button Content="Отмена" Style="{StaticResource SecondaryButton}" Width="100" Click="btnCancel_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>

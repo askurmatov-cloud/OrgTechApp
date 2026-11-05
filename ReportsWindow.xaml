@@ -1,0 +1,71 @@
+<Window x:Class="OrgTechApp.ReportsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Отчёты"
+        Height="720" Width="1050"
+        WindowStartupLocation="CenterOwner"
+        Background="{StaticResource BackgroundBrush}"
+        Loaded="Window_Loaded">
+    <Grid Margin="18">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Margin="0,0,0,12">
+            <TextBlock Text="Отчёты" Style="{StaticResource TitleText}"/>
+            <TextBlock Text="Наличие техники, списание и история операций"
+                       Style="{StaticResource MutedText}" Margin="0,3,0,0"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,0,0,10">
+            <Button Content="Обновить" Style="{StaticResource SecondaryButton}" Width="120" Click="btnRefresh_Click"/>
+        </StackPanel>
+
+        <TabControl Grid.Row="2">
+            <TabItem Header="Наличие по подразделениям">
+                <DataGrid x:Name="dgAvailability" AutoGenerateColumns="False" Margin="0,8,0,0" RowHeight="34">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Подразделение" Binding="{Binding Podrazdelenie}" Width="*"/>
+                        <DataGridTextColumn Header="Количество единиц" Binding="{Binding Kolichestvo}" Width="180"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </TabItem>
+
+            <TabItem Header="Списанная техника">
+                <DataGrid x:Name="dgWrittenOff" AutoGenerateColumns="False" Margin="0,8,0,0" RowHeight="34">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Дата" Binding="{Binding DataOperatsii, StringFormat=dd.MM.yyyy}" Width="90"/>
+                        <DataGridTextColumn Header="Инв. №" Binding="{Binding InventarnyyNomer}" Width="100"/>
+                        <DataGridTextColumn Header="Наименование" Binding="{Binding Naimenovanie}" Width="150"/>
+                        <DataGridTextColumn Header="Модель" Binding="{Binding Model}" Width="130"/>
+                        <DataGridTextColumn Header="Серийный №" Binding="{Binding SeriynyyNomer}" Width="110"/>
+                        <DataGridTextColumn Header="Причина" Binding="{Binding Prichina}" Width="*"/>
+                        <DataGridTextColumn Header="Документ" Binding="{Binding NomerDokumenta}" Width="140"/>
+                        <DataGridTextColumn Header="Исполнитель" Binding="{Binding Ispolnitel}" Width="110"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </TabItem>
+
+            <TabItem Header="История операций">
+                <DataGrid x:Name="dgHistory" AutoGenerateColumns="False" Margin="0,8,0,0" RowHeight="34">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Дата" Binding="{Binding DataOperatsii, StringFormat=dd.MM.yyyy}" Width="90"/>
+                        <DataGridTextColumn Header="Операция" Binding="{Binding Operatsiya}" Width="110"/>
+                        <DataGridTextColumn Header="Инв. №" Binding="{Binding InventarnyyNomer}" Width="100"/>
+                        <DataGridTextColumn Header="Наименование" Binding="{Binding Naimenovanie}" Width="150"/>
+                        <DataGridTextColumn Header="Исполнитель" Binding="{Binding Ispolnitel}" Width="110"/>
+                        <DataGridTextColumn Header="Получатель" Binding="{Binding Poluchatel}" Width="160"/>
+                        <DataGridTextColumn Header="Документ" Binding="{Binding NomerDokumenta}" Width="*"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </TabItem>
+        </TabControl>
+
+        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,10,0,0">
+            <Button Content="Закрыть" Style="{StaticResource SecondaryButton}" Width="100" Click="btnClose_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>

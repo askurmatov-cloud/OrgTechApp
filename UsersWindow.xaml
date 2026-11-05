@@ -1,0 +1,50 @@
+<Window x:Class="OrgTechApp.UsersWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Пользователи"
+        Height="650" Width="980"
+        WindowStartupLocation="CenterOwner"
+        Background="{StaticResource BackgroundBrush}"
+        Loaded="Window_Loaded">
+    <Grid Margin="18">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Margin="0,0,0,12">
+            <TextBlock Text="Пользователи и роли" Style="{StaticResource TitleText}"/>
+            <TextBlock Text="Управление доступом к приложению"
+                       Style="{StaticResource MutedText}" Margin="0,3,0,0"/>
+        </StackPanel>
+
+        <Border Grid.Row="1" Style="{StaticResource CardBorder}" Padding="10" Margin="0,0,0,10">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Роль:" VerticalAlignment="Center" Margin="4,0,8,0"/>
+                <ComboBox x:Name="cmbRole" Width="180" DisplayMemberPath="Naimenovanie"
+                          SelectedValuePath="KodRoli" SelectionChanged="cmbRole_SelectionChanged"/>
+                <Button Content="Применить роль" Style="{StaticResource SecondaryButton}" Click="btnApplyRole_Click"/>
+                <Button Content="Активировать / деактивировать" Style="{StaticResource SecondaryButton}" Click="btnToggleActive_Click"/>
+                <Button Content="Обновить" Style="{StaticResource SecondaryButton}" Click="btnRefresh_Click"/>
+            </StackPanel>
+        </Border>
+
+        <DataGrid Grid.Row="2" x:Name="dgUsers" AutoGenerateColumns="False" RowHeight="38"
+                  SelectionChanged="dgUsers_SelectionChanged">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Логин" Binding="{Binding Login}" Width="160"/>
+                <DataGridTextColumn Header="Роль" Binding="{Binding Rol}" Width="150"/>
+                <DataGridTextColumn Header="Код роли" Binding="{Binding KodRoli}" Width="110"/>
+                <DataGridTextColumn Header="Электронная почта" Binding="{Binding ElektronnayaPochta}" Width="*"/>
+                <DataGridTextColumn Header="Активен" Binding="{Binding AktivnoText}" Width="90"/>
+                <DataGridTextColumn Header="Последний вход" Binding="{Binding DataPoslednegoVhoda}" Width="150"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,10,0,0">
+            <Button Content="Закрыть" Style="{StaticResource SecondaryButton}" Width="100" Click="btnClose_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>
