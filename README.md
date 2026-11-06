@@ -17,6 +17,28 @@
 - отчёты: наличие по подразделениям, списанная техника, история операций;
 - управление пользователями и ролями для администратора.
 
+## Структура репозитория
+
+Весь проект приложения находится в одной папке — `OrgTechApp`:
+
+```
+OrgTechApp/                     проект целиком
+  OrgTechApp.sln                решение Visual Studio
+  OrgTechApp.csproj             проект WPF
+  App.xaml, App.xaml.cs         точка входа приложения
+  *.xaml, *.xaml.cs             окна WPF
+  Models.cs                     модели данных
+  Db.cs                         работа с MS SQL Server
+  PasswordHelper.cs             хеширование паролей с солью
+  Session.cs                    текущая сессия и проверка прав
+  PhotoHelper.cs                работа с фотографиями оборудования
+  ImagePathConverter.cs         конвертер путей к изображениям
+  Assets/Images/                изображения интерфейса
+  database/                     SQL-скрипты
+docs/                           пояснительная записка
+README.md                       описание проекта
+```
+
 ## Требования
 
 - Windows 10 или Windows 11;
@@ -26,7 +48,7 @@
 
 ## База данных
 
-В папке `database` находятся скрипты:
+Скрипты находятся в папке `OrgTechApp/database`:
 
 - `schema.sql` — создание таблиц, ограничений, представлений и хранимых процедур;
 - `data.sql` — тестовые данные.
@@ -36,20 +58,20 @@
 1. `schema.sql`;
 2. `data.sql`.
 
-Строка подключения задаётся в `Db.cs`. Перед публикацией в открытом репозитории
+Строка подключения задаётся в `OrgTechApp/Db.cs`. Перед публикацией в открытом репозитории
 рекомендуется заменить логин и пароль учебной базы на свои и не хранить пароли
 в исходном коде.
 
 ## Сборка и запуск
 
 ```powershell
-dotnet build OrgTechApp.csproj -c Release
+dotnet build OrgTechApp/OrgTechApp.csproj -c Release
 ```
 
 Запуск:
 
-- `Запуск.bat`;
-- или `bin\Release\net10.0-windows\OrgTechApp.exe`.
+- открыть `OrgTechApp/OrgTechApp.sln` в Visual Studio и нажать F5;
+- или запустить `OrgTechApp\bin\Release\net10.0-windows\OrgTechApp.exe`.
 
 ## Демонстрационные учётные записи
 
@@ -61,13 +83,3 @@ dotnet build OrgTechApp.csproj -c Release
 | USER | a.petrova | User#2026 |
 
 Пароли демонстрационные и предназначены только для учебного проекта.
-
-## Структура проекта
-
-- `*.xaml`, `*.xaml.cs` — окна WPF;
-- `Db.cs` — параметризованные запросы к MS SQL Server;
-- `PasswordHelper.cs` — хеширование паролей с солью;
-- `Session.cs` — текущая сессия и проверка прав;
-- `PhotoHelper.cs` — работа с фотографиями оборудования;
-- `Assets/Images` — изображения интерфейса;
-- `database` — SQL-скрипты.
